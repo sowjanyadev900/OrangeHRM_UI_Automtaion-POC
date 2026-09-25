@@ -1,0 +1,40 @@
+import {
+    test as base,
+    expect
+} from '@playwright/test';
+
+import { LoginPage } from '../pages/LoginPage';
+import { DashboardPage } from '../pages/DashboardPage';
+import { EmployeePage } from '../pages/EmployeePage';
+
+type OrangeHRMFixtures = {
+    loginPage: LoginPage;
+    dashboardPage: DashboardPage;
+    employeePage: EmployeePage;
+};
+
+export const test = base.extend<OrangeHRMFixtures>({
+
+    loginPage: async ({ page }, use) => {
+
+        const loginPage = new LoginPage(page);
+
+        await use(loginPage);
+    },
+
+    dashboardPage: async ({ page }, use) => {
+
+        const dashboardPage = new DashboardPage(page);
+
+        await use(dashboardPage);
+    },
+
+    employeePage: async ({ page }, use) => {
+
+        const employeePage = new EmployeePage(page);
+
+        await use(employeePage);
+    }
+});
+
+export { expect };
